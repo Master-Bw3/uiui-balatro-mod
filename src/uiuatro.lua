@@ -1,48 +1,8 @@
 mod_dir = '' .. SMODS.current_mod.path
 
-
--- SMODS.Atlas({
---     key = "Uiuatro",
---     atlas_table = "ASSET_ATLAS",
---     path = "jokers.png",
---     px = 71,
---     py = 95,
--- })
+assert(SMODS.load_file('src/operator_card.lua'))()
 
 
--- local function init_joker(joker, no_sprite)
---     no_sprite = no_sprite or false
-
---     --joker.atlas = "Uiuatro"
---     local joker = SMODS.Joker(joker)
--- end
-
--- local test_joker = {
---     key = "test",
---     config = {
---         extra = {
---             dollars = 5,
---             trash_list = {}
---         },
---     },
---     rarity = 4,
---     cost = 20,
---     unlocked = true,
---     discovered = true,
---     blueprint_compat = false,
---     eternal_compat = true,
---     pos = { x = 5, y = 3 },
---     soul_pos = { x = 0, y = 4 }
--- }
-
--- function test_joker.loc_vars(self, info, card)
---     return { vars = { card.ability.extra.dollars } }
--- end
-
--- -- Initialize Joker
--- init_joker(test_joker)
-
--- added game states
 
 if not UIUATRO then UIUATRO = {} end
 
@@ -53,8 +13,6 @@ UIUATRO.stack_deck = nil;
 
 function UIUATRO:hide_stack_hand()
     self.stack_hand.states.visible = false
-
-    
 end
 
 function UIUATRO:show_stack_hand()
@@ -84,8 +42,32 @@ on_game_state_change = Event({
     blocking = false
 })
 
-function UIUATRO:start_up()
+SMODS.Atlas({
+    key = "Operator",
+    path = "Operators.png",
+    px = 71,
+    py = 95
+}):register()
 
+local dip_center = {
+    order = 1,
+    unlocked = true,
+    start_alerted = true,
+    available = true,
+    discovered = true,
+    name = "Dip",
+    pos = { x = 0, y = 1 },
+    set = "Operator",
+    config = {},
+    key = "op_dip",
+    atlas = "uiuatro_Operator"
+}
+
+local function dip()
+    return Card(UIUATRO.stack_hand.T.x, UIUATRO.stack_hand.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, dip_center)
+end
+
+function UIUATRO:start_up()
 end
 
 function UIUATRO:set_up_ui()
@@ -120,7 +102,9 @@ end
 function doThing(e)
     print("i pressed")
     if (G.STATE == G.STATES.SELECTING_HAND) then
-        draw_card(G.hand, UIUATRO.stack_deck, 1, 'up', true)
+        -- draw_card(G.hand, UIUATRO.stack_deck, 1, 'up', true)
+
+        local dip = dip()
 
         draw_card(UIUATRO.stack_deck, UIUATRO.stack_hand, 1, 'up', true)
     end

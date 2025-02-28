@@ -1,0 +1,7 @@
+{
+    "search.useGlobalIgnoreFiles": false,
+    "search.useIgnoreFiles": false,
+    "Lua.diagnostics.globals": [
+        "secondHand"
+    ]
+}

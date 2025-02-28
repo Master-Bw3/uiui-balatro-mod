@@ -6,7 +6,7 @@
 	],
 	"description": "uiua inspired Balatro mod",
 	"prefix": "uiuatro",
-	"main_file": "main.lua",
+	"main_file": "uiuatro.lua",
 	"priority": 0,
 	"badge_colour": "FF230A",
 	"badge_text_colour": "ABC123",
